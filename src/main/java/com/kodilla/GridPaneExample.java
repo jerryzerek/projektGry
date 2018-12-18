@@ -33,7 +33,7 @@ public class GridPaneExample extends Application {
         GridPane gridPane = new GridPane();
 
         //Setting size for the pane
-        gridPane.setMinSize(400, 200);
+        gridPane.setMinSize(200, 100);
 
         //Setting the padding
         gridPane.setPadding(new Insets(10, 10, 10, 10));

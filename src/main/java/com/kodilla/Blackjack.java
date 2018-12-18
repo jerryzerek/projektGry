@@ -1,33 +1,50 @@
 package com.kodilla;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class Blackjack extends Application {
-
-    private Image imageback = new Image("file:resources/images/Tondenga.jpg");
+public class Blackjack {
 
     public static void main(String[] args) {
-        launch(args);
-    }
+        int numberOfPlayers = 3;
+        Deck deck = new Deck();
+        List<Hand> players = new ArrayList<>();
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        BackgroundSize backgroundSize = new BackgroundSize(500, 500, true, true, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        Background background = new Background(backgroundImage);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            Hand hand = new Hand(String.valueOf("Player" + (i)));
+            players.add(hand);
+        }
 
-        GridPane grid = new GridPane();
-        grid.setBackground(background);
+        for (int i = 1; i < numberOfPlayers; i++) {
+            players.get(i).drawAndWait(deck);
+        }
+        players.get(0).drawForDealer(deck);
 
-        Scene scene = new Scene(grid, 600, 300, Color.BLACK);
+        for (int i = 1; i <numberOfPlayers; i++) {
+            System.out.println("Player" + i + " has " + players.get(i).calculate() + " points");
+        }
+        System.out.println("Dealer has " + players.get(0).calculate() + " points");
 
-        primaryStage.setTitle("BlackJack");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Hand winner = new Hand("");
+        for (Hand hand: players) {
+            if (hand.calculate() > winner.calculate() && hand.calculate() <= 21) {
+                winner = hand;
+            }
+        }
+
+        if(winner.equals(players.get(0))) {
+            System.out.println("The winner is dealer with score " + winner.calculate());
+        } else {
+            System.out.println("The winner is " + winner.getPlayerNumber() + " with score " + winner.calculate());
+        }
+
     }
 }
+
+
+
+
+
+
+
