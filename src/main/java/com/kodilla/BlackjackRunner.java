@@ -11,8 +11,8 @@ import javafx.scene.layout.FlowPane;
 
 public class BlackjackRunner extends Application {
     private final Deck deck = new Deck();
-    private final Hand dealer = new Hand();
-    private final Hand hand = new Hand();
+//    private final Hand dealer = new Hand();
+//    private final Hand hand = new Hand();
 
     FlowPane cards = new FlowPane(Orientation.HORIZONTAL);
     FlowPane dealerCards = new FlowPane(Orientation.HORIZONTAL);
